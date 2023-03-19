@@ -1,44 +1,79 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Pediatric Antibiotic Dose Check</title>
+    <title>Pediatric Dose Checker</title>
     <meta charset = "UTF-8"/>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <style>
       body {
         font-family: "Montserrat", sans-serif;
         color: white;
+        background-color: black;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #main-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 90vh;
+        width: 90vw;
         background-image: url(https://www.teahub.io/photos/full/118-1189775_cartoon-sunset-sky-background.jpg);
         background-repeat: no-repeat;
         background-size: cover;
-        background-attachment: fixed; 
+        background-attachment: fixed;
+        box-shadow:
+          0 0 5px 7px #f79bea,
+          0 0 15px 10px #ff73ec,
+          0 0 25px 20px #ff3ae5;
+        /* in order: x offset, y offset, blur size, spread size, color */
+      }
+      #form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 63vh;
+        width: 85vw;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 0 20px 0;
       }
       h1 {
         margin: 20px 0px 50px 0px;
-        font-size: 50px;
+        font-size: 70px;
       }
       label {
-        font-size: 25px;
+        font-size: 50px;
+        margin: 20px 0 0px 0;
       }
-      select {
-        height: 45px;
-        width: 250px;
-        font-size: 25px;
-        font-family: "Montserrat"
-      }
-      input {
-        height: 45px;
-        width: 250px;
-        font-size: 25px;
+      select, input {
+        height: 75px;
+        width: 400px;
+        font-size: 50px;
         font-family: "Montserrat";
+        margin: 20px 0 20px 0;
       }
       button {
-        height: 45px;
-        width: 125px;
-        border: 1px solid white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 75px;
+        width: 250px;
+        margin: 20px 0 20px 0;
+        border: 2px solid white;
+        border-radius: 3px;
         color: white;
         background-color: #3f2a85;
-        font-size: 20px;
+        font-size: 50px;
         font-family: "Montserrat";
         transition-duration: 0.15s;
       }
@@ -48,53 +83,57 @@
         box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #e600db, 0 0 20px #e600db, 0 0 25px #e600db, 0 0 30px #e600db, 0 0 35px #e600db;
       }
       #outputDiv {
-        height: 50vw;
-        padding: 20px 0px 0px 0px;
-        font-size: 25px;
+        height: 22vh;
+        width: 85vw;
       }
-      #space1 {
-        height: 20px;
-      }
-      #space2 {
-        height: 20px;
+      .outputHTML {
+        font-size: 50px;
       }
       #disclaimer {
-        font-size: 10px;
+        font-size: 25px;
         position: fixed;
         bottom: 0;
       }
     </style>
   </head>
   <body>
-      <h1>Pediatric Antibiotic Dose Check</h1>
-    <form id="getDose">
-      <label for="antibiotics">Choose Antibiotic: </label>
-        <select name="antibiotics" id="antibiotics">
-          <option value="amoxicillin">amoxicillin</option>
-          <option value="amox-clav">amox-clav</option>
-          <option value="azithromycin">azithromycin</option>
-          <option value="cefdinir">cefdinir</option>
-          <option value="cephalexin">cephalexin</option>
-          <option value="oseltamivir">oseltamivir</option>
-      </select><br>
-    <div id="space1"></div>
-    <label for="weight">Enter patient's weight: </label>
-    <input id="weight" type="text" placeholder="Weight (kg)"></input><br>
-    <div id="space2"></div>
-    <button id="btn" type="submit">Calculate!</button>
-    </form>
-    <div id="outputDiv">
-      
+    <div id="main-container"><!--<img class="background-image" src="../ped_dose_check/images/118-1189775_cartoon-sunset-sky-background.jpeg" onerror='this.src="https://www.teahub.io/photos/full/118-1189775_cartoon-sunset-sky-background.jpg"'>-->
+      <div id="form-container">
+        <h1>Pediatric Dose Checker</h1>
+        <form id="getDose">
+          <!--<label for="antibiotics">Drug: </label>-->
+            <select name="antibiotics" id="antibiotics">
+              <option value="amoxicillin">amoxicillin</option>
+              <option value="amox-clav">amox-clav</option>
+              <option value="azithromycin">azithromycin</option>
+              <option value="cefdinir">cefdinir</option>
+              <option value="cephalexin">cephalexin</option>
+              <option value="oseltamivir">oseltamivir</option>
+            </select>
+          <!--<label for="weight">Weight: </label>-->
+          <input id="weight" type="text" placeholder="Weight (kg)"></input>
+          <button id="btn" type="submit">Calculate</button>
+        </form>
+      </div>
+      <div id="outputDiv"></div>
     </div>
-    <header>
-    </header>
+
     <script>
+      /*
+      ST. PATTY'S DAY WEEKEND EDITS
+       - add flexboxes wherever to center elements and group form together
+       - create popup box or output div that displays calculation result - whatever looks best
+       - verify shit shows up as it should on phone display
+       - start figuring out how to consolidate calculations into JSON object 
+      */
+
       var form = document.getElementById('getDose');
       form.addEventListener('submit', runCalc)
       function runCalc(e) {
         e.preventDefault();
         var newAntibiotic = document.getElementById('antibiotics').value;
         var newWeight = document.getElementById('weight').value;
+        var outputHTML = ""
         var outputDiv = document.getElementById('outputDiv');
         
         if (newAntibiotic == 'amoxicillin' && newWeight >= 5) {
@@ -139,23 +178,25 @@
         }
         else if (newAntibiotic == 'oseltamivir'){
           if (newWeight <= 15){
-            var output = "30 mg (5 mL) twice daily for 5 days if treatment dosage or 30 mg once daily for 10 days if prophylaxis dosage" + " (if patient is under 1 year old, treatment dose should be 3 mg/kg twice daily for 5 days (ppx not appropriate))"
+            var output = "30 mg (5 mL) twice daily for 5 days if treatment or 30 mg once daily for 10 days if prophylaxis" + " (if patient under 1, treatment dose is " + Math.round(newWeight*3) + " mg twice daily for 5 days (ppx not appropriate))"
           }
           else if (newWeight <= 23){
-            var output = "45 mg (7.5 mL) twice daily for 5 days if treatment dosage or 45 mg once daily for 10 days if prophylaxis dosage" + " (if patient is under 1 year old, treatment dose should be 3 mg/kg twice daily for 5 days (ppx not appropriate))"
+            var output = "45 mg (7.5 mL) twice daily for 5 days if treatment or 45 mg once daily for 10 days if prophylaxis" + " (if patient under 1, treatment dose is " + Math.round(newWeight*3) + " mg twice daily for 5 days (ppx not appropriate))"
           }
           else if (newWeight <= 40){
-            var output = "60 mg (10 mL) twice daily for 5 days if treatment dosage or 60 mg once daily for 10 days if prophylaxis dosage"
+            var output = "60 mg (10 mL) twice daily for 5 days if treatment or 60 mg once daily for 10 days if prophylaxis"
           }
           else {
-            var output = "75 mg (12.5 mL) twice daily for 5 days if treatment dosage or 75 mg once daily for 10 days if prophylaxis dosage"
+            var output = "75 mg (12.5 mL) twice daily for 5 days if treatment or 75 mg once daily for 10 days if prophylaxis"
           }
         }
         else {
           var output = "uh"
         }
         
-        outputDiv.innerHTML = output;
+        outputHTML += `<div class="outputHTML">${output}</div>`
+        outputDiv.innerHTML = outputHTML
+        //outputDiv.innerHTML = output;
       }
     </script>
     <div id="disclaimer"><p>Disclaimer: Dosing values displayed are intended to serve as a general reference, not to dose antibiotcs for specific patients and indications.</p></div>
