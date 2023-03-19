@@ -9,7 +9,7 @@
         font-family: "Montserrat", sans-serif;
         color: white;
         background-color: black;
-        height: 85vh;
+        height: 88vh;
         width: 100vw;
         display: flex;
         align-items: top;
@@ -20,10 +20,10 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 83vh;
+        height: 80vh;
         width: 90vw;
         margin: 40px 0 0 0;
-        border-radius: 5px;
+        border-radius: 10px;
         background-image: url(https://www.teahub.io/photos/full/118-1189775_cartoon-sunset-sky-background.jpg);
         /*background-repeat: no-repeat;
         background-attachment: fixed;*/
@@ -40,7 +40,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 62vh;
+        height: 59vh;
         width: 85vw;
       }
       form {
@@ -85,7 +85,13 @@
       button:hover {
         color: black;
         background-color: white;
-        box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #e600db, 0 0 20px #e600db, 0 0 25px #e600db, 0 0 30px #e600db, 0 0 35px #e600db;
+        box-shadow: 0 0 5px #fff,
+                    0 0 10px #fff,
+                    0 0 15px #e600db,
+                    0 0 20px #e600db,
+                    0 0 25px #e600db,
+                    0 0 30px #e600db,
+                    0 0 35px #e600db;
       }
       #outputDiv {
         height: 21vh;
@@ -94,11 +100,38 @@
       .outputHTML {
         font-size: 50px;
       }
-      #disclaimer {
+      #btn2 {
+        height: 40px;
+        width: 250px;
+        border: 1px solid white;
+        color: white;
+        background-color: #3f2a85;
+        font-size: 25px;
+        font-family: "Montserrat";
+        transition-duration: 0.15s;
+      }
+        #btn2:hover {
+        color: black;
+        background-color: white;
+        box-shadow: 0 0 5px #fff,
+                    0 0 10px #fff,
+                    0 0 15px #e600db
+                    0 0 20px #e600db,
+                    0 0 25px #e600db,
+                    0 0 30px #e600db,
+                    0 0 35px #e600db;
+      }
+      #mme_calc {
         font-size: 25px;
         position: fixed;
         bottom: 0;
+        margin: 0px 0px 10px 0px;
+        }
+      a {
+        text-decoration: none;
+        color: white;
       }
+      
     </style>
   </head>
   <body>
@@ -122,7 +155,9 @@
       </div>
       <div id="outputDiv"></div>
     </div>
-
+    <div id="mme_calc">
+      <button id="btn2"><a href="mme_calc.html">MME Calculator</a></button>
+    </div>
     <script>
       /*
       ST. PATTY'S DAY WEEKEND EDITS
